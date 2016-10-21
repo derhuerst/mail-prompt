@@ -5,19 +5,47 @@ const ui = require('cli-styles')
 const esc = require('ansi-escapes')
 const chalk = require('chalk')
 const wrap = require('prompt-skeleton')
+const parse = require('email-addresses').parseOneAddress
+const providers = require('email-providers/common.json')
 
 
+
+const completeDomain = (d) => {
+	if (d === '') return false
+	for (let provider of providers)
+		if (provider.substring(0, d.length) === d)
+			return provider.substring(d.length)
+	return false
+}
 
 const MailPrompt = Object.assign(Object.create(TextPrompt), {
 
-	  _: function (c) {
-		this.setValue(this.value + c)
+	  parse: (s) => {
+		try {
+			const p = parse(s)
+			if (!p) return {_: s, local: s, domain: ''}
+			return {_: p.address, local: p.local, domain: p.domain}
+		} catch (err) {return false}
+	}
+
+	, setValue: function (v) {
+		const parsed = this.parse(v)
+		if (!parsed) return this.bell()
+		this.value = v
+		this.rendered = this.transform(v)
+		this.completion = completeDomain(parsed.domain)
+		this.cursor = Math.min(this.rendered.length, this.cursor)
+		this.emit()
+	}
+
+	, right: function () {
+		if (this.completion) this.setValue(this.value + this.completion)
 		this.cursor = this.rendered.length
 		this.render()
 	}
-	, delete: function () {
-		if (this.value.length === 0) return this.bell()
-		this.setValue(this.value.slice(0, -1))
+	, next: function () {
+		if (this.completion) this.setValue(this.value + this.completion)
+		this.cursor = this.rendered.length
 		this.render()
 	}
 
@@ -29,6 +57,7 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 			, chalk.bold(this.msg)
 			, ui.delimiter(this.done)
 			, this.rendered
+			+ (this.completion ? chalk.gray(this.completion) : '')
 		].join(' '))
 		this.out.write(esc.cursorMove(-this.rendered.length + this.cursor))
 	}
@@ -37,15 +66,16 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 
 
 const defaults = {
-	  value:     ''
-	, rendered:  ''
-	, transform: ui.render()
+	  value:      ''
+	, rendered:   ''
+	, transform:  ui.render()
+	, completion: ''
 
-	, msg:       ''
-	, cursor:    0
+	, msg:        ''
+	, cursor:     0
 
-	, done:      false
-	, aborted:   false
+	, done:       false
+	, aborted:    false
 }
 
 const mailPrompt = (msg, opt) => {
