@@ -7,6 +7,7 @@ const chalk = require('chalk')
 const wrap = require('prompt-skeleton')
 const parse = require('email-addresses').parseOneAddress
 const providers = require('email-providers/common.json')
+const validDomain = require('domain-regex')()
 
 
 
@@ -20,7 +21,14 @@ const completeDomain = (d) => {
 
 const MailPrompt = Object.assign(Object.create(TextPrompt), {
 
-	  parse: (s) => {
+	  valid: (s) => {
+		try {
+			const p = parse(s)
+			return !!p && validDomain.test(p.domain)
+		} catch (err) {return false}
+	}
+
+	, parse: (s) => {
 		try {
 			const p = parse(s)
 			if (!p) return {_: s, local: s, domain: ''}
@@ -47,6 +55,11 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 		if (this.completion) this.setValue(this.value + this.completion)
 		this.cursor = this.rendered.length
 		this.render()
+	}
+
+	, submit: function () {
+		if (!this.valid(this.value)) return this.bell()
+		TextPrompt.submit.call(this)
 	}
 
 
