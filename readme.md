@@ -2,6 +2,8 @@
 
 **A CLI prompt for email addresses.**
 
+[![asciicast](https://asciinema.org/a/90148.png)](https://asciinema.org/a/90148)
+
 [![npm version](https://img.shields.io/npm/v/mail-prompt.svg)](https://www.npmjs.com/package/mail-prompt)
 [![dependency status](https://img.shields.io/david/derhuerst/mail-prompt.svg)](https://david-dm.org/derhuerst/mail-prompt)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/mail-prompt.svg)](https://david-dm.org/derhuerst/mail-prompt#info=devDependencies)

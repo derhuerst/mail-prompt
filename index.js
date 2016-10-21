@@ -5,7 +5,7 @@ const ui = require('cli-styles')
 const esc = require('ansi-escapes')
 const chalk = require('chalk')
 const wrap = require('prompt-skeleton')
-const parse = require('email-addresses').parseOneAddress
+const _parse = require('email-addresses').parseOneAddress
 const providers = require('email-providers/common.json')
 const validDomain = require('domain-regex')()
 
@@ -19,25 +19,25 @@ const completeDomain = (d) => {
 	return false
 }
 
+const parse = (s) => {
+	try {
+		const p = _parse(s)
+		if (!p) return {_: s, local: s, domain: ''}
+		return {_: p.address, local: p.local, domain: p.domain}
+	} catch (err) {return false}
+}
+
+const isValid = (s) => {
+	try {
+		const p = _parse(s)
+		return !!p && validDomain.test(p.domain)
+	} catch (err) {return false}
+}
+
 const MailPrompt = Object.assign(Object.create(TextPrompt), {
 
-	  valid: (s) => {
-		try {
-			const p = parse(s)
-			return !!p && validDomain.test(p.domain)
-		} catch (err) {return false}
-	}
-
-	, parse: (s) => {
-		try {
-			const p = parse(s)
-			if (!p) return {_: s, local: s, domain: ''}
-			return {_: p.address, local: p.local, domain: p.domain}
-		} catch (err) {return false}
-	}
-
-	, setValue: function (v) {
-		const parsed = this.parse(v)
+	  setValue: function (v) {
+		const parsed = parse(v)
 		if (!parsed) return this.bell()
 		this.value = v
 		this.rendered = this.transform(v)
@@ -58,7 +58,7 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 	}
 
 	, submit: function () {
-		if (!this.valid(this.value)) return this.bell()
+		if (!isValid(this.value)) return this.bell()
 		TextPrompt.submit.call(this)
 	}
 
