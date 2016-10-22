@@ -1,7 +1,7 @@
 {
 	"name":             "mail-prompt",
 	"description":      "A CLI prompt for email addresses.",
-	"version":          "0.1.0",
+	"version":          "0.1.1",
 	"main":             "index.js",
 	"files":            ["index.js"],
 	"keywords":         ["mail", "email", "interactive", "prompt", "command line", "cli", "terminal", "readline"],
@@ -12,6 +12,7 @@
 	"license":          "ISC",
 	"engines":          {"node": ">=6"},
 	"dependencies": {
+		"text-prompt": "^0.1",
 		"cli-styles":      "^0.4",
 		"ansi-escapes":    "^1.4",
 		"chalk":           "^1.1.3",
