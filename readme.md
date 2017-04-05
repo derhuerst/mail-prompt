@@ -8,6 +8,7 @@
 [![dependency status](https://img.shields.io/david/derhuerst/mail-prompt.svg)](https://david-dm.org/derhuerst/mail-prompt)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/mail-prompt.svg)](https://david-dm.org/derhuerst/mail-prompt#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/mail-prompt.svg)
+[![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
 
 *mail-prompt* uses [*cli-styles*](https://github.com/derhuerst/cli-styles) and [*prompt-skeleton*](https://github.com/derhuerst/prompt-skeleton) to have a look & feel consistent with [other prompts](https://github.com/derhuerst/prompt-skeleton#prompts-using-prompt-skeleton).
 
@@ -32,12 +33,15 @@ mailPrompt('Your email address?')
 
 ## Related
 
-- [`text-prompt`](https://github.com/derhuerst/text-prompt)
 - [`date-prompt`](https://github.com/derhuerst/date-prompt)
 - [`multiselect-prompt`](https://github.com/derhuerst/multiselect-prompt)
 - [`number-prompt`](https://github.com/derhuerst/number-prompt)
+- [`range-prompt`](https://github.com/derhuerst/range-prompt)
 - [`select-prompt`](https://github.com/derhuerst/select-prompt)
+- [`text-prompt`](https://github.com/derhuerst/text-prompt)
+- [`tree-select-prompt`](https://github.com/derhuerst/tree-select-prompt)
 - [`cli-autocomplete`](https://github.com/derhuerst/cli-autocomplete)
+- [`switch-prompt`](https://github.com/derhuerst/switch-prompt)
 
 
 ## Contributing
