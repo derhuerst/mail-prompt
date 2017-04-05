@@ -1,7 +1,7 @@
 {
 	"name":             "mail-prompt",
 	"description":      "A CLI prompt for email addresses.",
-	"version":          "0.1.1",
+	"version":          "0.1.2",
 	"main":             "index.js",
 	"files":            ["index.js"],
 	"keywords":         ["mail", "email", "interactive", "prompt", "command line", "cli", "terminal", "readline"],
