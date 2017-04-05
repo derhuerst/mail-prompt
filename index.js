@@ -65,14 +65,17 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 
 
 	, render: function () {
-		this.out.write(esc.eraseLine + esc.cursorTo(0) + [
+		const prompt = [
 			  ui.symbol(this.done, this.aborted)
 			, chalk.bold(this.msg)
 			, ui.delimiter(this.done)
 			, this.rendered
 			+ (this.completion ? chalk.gray(this.completion) : '')
-		].join(' '))
+		].join(' ')
+		this.out.write(this.clear + prompt)
 		this.out.write(esc.cursorMove(-this.rendered.length + this.cursor))
+
+		this.clear = ui.clear(prompt)
 	}
 })
 
@@ -84,6 +87,7 @@ const defaults = {
 	, transform:  ui.render()
 	, completion: ''
 
+	, clear:      ui.clear('')
 	, msg:        ''
 	, cursor:     0
 
