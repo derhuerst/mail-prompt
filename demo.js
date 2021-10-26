@@ -3,5 +3,5 @@
 const mailPrompt = require('./index')
 
 mailPrompt('Your eMail address?')
-.on('abort', (v) => console.log(`Aborted with ${v}.`))
-.on('submit', (v) => console.log(`Submitted with ${v}.`))
+.catch((v) => console.log(`Aborted with ${v}.`))
+.then((v) => console.log(`Submitted with ${v}.`))

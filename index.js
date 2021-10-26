@@ -43,7 +43,6 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 		this.rendered = this.transform(v)
 		this.completion = completeDomain(parsed.domain)
 		this.cursor = Math.min(this.rendered.length, this.cursor)
-		this.emit()
 	}
 
 	, right: function () {
@@ -59,7 +58,11 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 
 	, submit: function () {
 		if (!isValid(this.value)) return this.bell()
-		TextPrompt.submit.call(this)
+		this.done = true
+		this.aborted = false
+		this.render()
+		this.out.write('\n')
+		this.close()
 	}
 
 
@@ -72,10 +75,7 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 			, this.rendered
 			+ (this.completion ? chalk.gray(this.completion) : '')
 		].join(' ')
-		this.out.write(this.clear + prompt)
-		this.out.write(esc.cursorMove(-this.rendered.length + this.cursor))
-
-		this.clear = ui.clear(prompt)
+		this.out.write(prompt + esc.cursorMove(-this.rendered.length + this.cursor))
 	}
 })
 
@@ -84,10 +84,9 @@ const MailPrompt = Object.assign(Object.create(TextPrompt), {
 const defaults = {
 	  value:      ''
 	, rendered:   ''
-	, transform:  ui.render()
+	, transform:  input => input
 	, completion: ''
 
-	, clear:      ui.clear('')
 	, msg:        ''
 	, cursor:     0
 
