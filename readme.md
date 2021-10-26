@@ -8,7 +8,8 @@
 [![dependency status](https://img.shields.io/david/derhuerst/mail-prompt.svg)](https://david-dm.org/derhuerst/mail-prompt)
 [![dev dependency status](https://img.shields.io/david/dev/derhuerst/mail-prompt.svg)](https://david-dm.org/derhuerst/mail-prompt#info=devDependencies)
 ![ISC-licensed](https://img.shields.io/github/license/derhuerst/mail-prompt.svg)
-[![chat on gitter](https://badges.gitter.im/derhuerst.svg)](https://gitter.im/derhuerst)
+[![support me via GitHub Sponsors](https://img.shields.io/badge/support%20me-donate-fa7664.svg)](https://github.com/sponsors/derhuerst)
+[![chat with me on Twitter](https://img.shields.io/badge/chat%20with%20me-on%20Twitter-1da1f2.svg)](https://twitter.com/derhuerst)
 
 *mail-prompt* uses [*cli-styles*](https://github.com/derhuerst/cli-styles) and [*prompt-skeleton*](https://github.com/derhuerst/prompt-skeleton) to have a look & feel consistent with [other prompts](https://github.com/derhuerst/prompt-skeleton#prompts-using-prompt-skeleton).
 

@@ -1,15 +1,26 @@
 {
-	"name":             "mail-prompt",
-	"description":      "A CLI prompt for email addresses.",
-	"version":          "0.1.2",
-	"main":             "index.js",
-	"files":            ["index.js"],
-	"keywords":         ["mail", "email", "interactive", "prompt", "command line", "cli", "terminal", "readline"],
-	"author":           "Jannis R <mail@jannisr.de>",
-	"homepage":         "https://github.com/derhuerst/mail-prompt",
-	"repository":       "derhuerst/mail-prompt",
-	"bugs":             "https://github.com/derhuerst/mail-prompt/issues",
-	"license":          "ISC",
+	"name": "mail-prompt",
+	"description": "A CLI prompt for email addresses.",
+	"version": "1.0.0",
+	"main": "index.js",
+	"files": [
+		"index.js"
+	],
+	"keywords": [
+		"mail",
+		"email",
+		"interactive",
+		"prompt",
+		"command line",
+		"cli",
+		"terminal",
+		"readline"
+	],
+	"author": "Jannis R <mail@jannisr.de>",
+	"homepage": "https://github.com/derhuerst/mail-prompt",
+	"repository": "derhuerst/mail-prompt",
+	"bugs": "https://github.com/derhuerst/mail-prompt/issues",
+	"license": "ISC",
 	"engines": {
 		"node": ">=14"
 	},
